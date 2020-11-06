@@ -1,3 +1,7 @@
+data "aws_subnet_ids" "cluster" {
+  vpc_id = var.vpc_id
+}
+
 resource "aws_ecs_task_definition" "main" {
   cpu                      = var.cpu
   family                   = "${local.name_with_prefix}-service"
@@ -21,7 +25,7 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = var.ecs_service_security_group_ids
-    subnets          = var.subnet_ids
+    subnets          = data.aws_subnet_ids.cluster.ids
     assign_public_ip = false
   }
 

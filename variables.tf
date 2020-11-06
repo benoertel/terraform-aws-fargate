@@ -26,9 +26,4 @@ variable "env" {
 variable "name" {
 }
 
-variable "subnet_ids" {
-  type    = list(string)
-  default = []
-}
-
 variable "vpc_id" {}
