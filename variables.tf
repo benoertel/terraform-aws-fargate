@@ -14,8 +14,6 @@ variable "desired_count" {
 
 variable "ecs_cluster_id" {}
 
-variable "ecs_service_security_group_ids" {}
-
 variable "memory" {
   default = 512
 }
@@ -25,5 +23,7 @@ variable "env" {
 
 variable "name" {
 }
+
+variable "sg_name" {}
 
 variable "vpc_id" {}
