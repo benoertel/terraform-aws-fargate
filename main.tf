@@ -1,5 +1,10 @@
 data "aws_subnet_ids" "cluster" {
   vpc_id = var.vpc_id
+
+  filter {
+    name   = "tag:Name"
+    values = ["bsx-bosix-private-*"]
+  }
 }
 
 data "aws_security_group" "cluster_instance" {
