@@ -1,6 +1,6 @@
 resource "aws_ecs_task_definition" "main" {
   cpu                      = var.cpu
-  family                   = "service"
+  family                   = "${local.name_with_prefix}-service"
   memory                   = var.memory
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
