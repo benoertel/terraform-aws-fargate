@@ -43,6 +43,6 @@ data "aws_iam_policy" "AmazonECSTaskExecutionRolePolicy" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_access" {
-  role       = "${aws_iam_role.ecs_task_role.name}"
+  role       = "${aws_iam_role.ecs_task_execution_role.name}"
   policy_arn = "${data.aws_iam_policy.AmazonECSTaskExecutionRolePolicy.arn}"
 }
