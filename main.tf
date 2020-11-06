@@ -37,10 +37,11 @@ resource "aws_ecs_service" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name     = local.name_with_prefix
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  name        = local.name_with_prefix
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  target_type = "ip"
 
   health_check {
     healthy_threshold   = 5
