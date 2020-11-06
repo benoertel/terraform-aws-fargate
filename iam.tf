@@ -38,31 +38,11 @@ resource "aws_iam_role" "ecs_task_execution_role" {
 EOF
 }
 
-resource "aws_iam_policy" "policy" {
-  name        = "ecr-access"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-     "Effect": "Allow",
-     "Action": [
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
+data "aws_iam_policy" "AmazonECSTaskExecutionRolePolicy" {
+  arn = "arn:aws:iam::aws:policy/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_access" {
-  role       = "${aws_iam_role.ecs_task_execution_role.name}"
-  policy_arn = "${aws_iam_policy.policy.arn}"
+  role       = "${aws_iam_role.ecs_task_role.name}"
+  policy_arn = "${data.aws_iam_policy.AmazonECSTaskExecutionRolePolicy.arn}"
 }
