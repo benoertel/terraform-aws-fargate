@@ -32,8 +32,20 @@ resource "aws_iam_role" "ecs_task_execution_role" {
      },
      "Effect": "Allow",
      "Sid": ""
-   },
-   {
+   }
+ ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "ecr-access"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
      "Effect": "Allow",
      "Action": [
         "ecr:GetAuthorizationToken",
@@ -45,7 +57,12 @@ resource "aws_iam_role" "ecs_task_execution_role" {
       ],
       "Resource": "*"
     }
- ]
+  ]
 }
 EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ecr_access" {
+  role       = "${aws_iam_role.ecs_task_execution_role.name}"
+  policy_arn = "${aws_iam_policy.policy.arn}"
 }
