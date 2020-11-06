@@ -26,7 +26,7 @@ resource "aws_ecs_service" "main" {
   }
 
   load_balancer {
-    target_group_arn = var.alb_target_group_arn
+    target_group_arn = aws_lb_target_group.main.arn
     container_name   = "web"
     container_port   = var.container_port
   }
@@ -40,7 +40,7 @@ resource "aws_lb_target_group" "main" {
   name     = local.name_with_prefix
   port     = 80
   protocol = "HTTP"
-  vpc_id   = local.vpc_id
+  vpc_id   = var.vpc_id
 
   health_check {
     healthy_threshold   = 5
