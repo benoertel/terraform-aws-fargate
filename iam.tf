@@ -39,7 +39,7 @@ EOF
 }
 
 data "aws_iam_policy" "AmazonECSTaskExecutionRolePolicy" {
-  arn = "arn:aws:iam::aws:policy/AmazonECSTaskExecutionRolePolicy"
+  arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_access" {
