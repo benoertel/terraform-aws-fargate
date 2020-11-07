@@ -18,6 +18,15 @@ resource "aws_iam_role" "ecs_task_role" {
 EOF
 }
 
+data "aws_iam_policy" "AmazonS3FullAccess" {
+  arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "s3_access" {
+  role       = aws_iam_role.ecs_task_role.name
+  policy_arn = data.aws_iam_policy.AmazonS3FullAccess.arn
+}
+
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "${local.name_with_prefix}-ecsTaskExecutionRole"
 
