@@ -35,7 +35,7 @@ resource "aws_ecs_service" "main" {
   network_configuration {
     security_groups  = [data.aws_security_group.cluster_instance.id]
     subnets          = data.aws_subnet_ids.cluster.ids
-    assign_public_ip = false
+    assign_public_ip = true
   }
 
   load_balancer {
