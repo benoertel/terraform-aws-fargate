@@ -3,7 +3,7 @@ data "aws_subnet_ids" "cluster" {
 
   filter {
     name   = "tag:Name"
-    values = ["*-private-*"]
+    values = ["*-public-*"]
   }
 }
 
