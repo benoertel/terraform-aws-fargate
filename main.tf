@@ -1,6 +1,6 @@
 data "aws_subnets" "cluster" {
   filter {
-    name   = "vpc_id"
+    name   = "vpc-id"
     values = [var.vpc_id]
   }
 
