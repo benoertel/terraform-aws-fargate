@@ -1,5 +1,8 @@
-data "aws_subnet_ids" "cluster" {
-  vpc_id = var.vpc_id
+data "aws_subnets" "cluster" {
+  filter {
+    name   = "vpc_id"
+    values = [var.vpc_id]
+  }
 
   filter {
     name   = "tag:Name"
@@ -35,7 +38,7 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = [data.aws_security_group.cluster_instance.id]
-    subnets          = data.aws_subnet_ids.cluster.ids
+    subnets          = data.aws_subnets.cluster.ids
     assign_public_ip = true
   }
 
